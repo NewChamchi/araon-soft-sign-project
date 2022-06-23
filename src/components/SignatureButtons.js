@@ -1,6 +1,7 @@
 import React from 'react';
 import '../index.css';
 
+/* 확인 취소 버튼 */
 const SignatureButtons = ({ onSubmit, onCancel }) => {
 
     return (

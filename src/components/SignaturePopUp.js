@@ -11,11 +11,13 @@ const customStyles = {
         left: '50%',
         right: 'auto',
         bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
+        // 각각 화면 상하좌우로부터 얼마나 떨어지는지 표시하는 기능임 (다 50%으로 밀어버리면 화면 가운데로 수렴해버림)
+        // marginRight : '50%' 왜 있는 거냐?
+        transform: 'translate(-50%, -50%)', // 위치를 이동 시킴 (아마 right와 bottom을 쓸 수 없기 때문에 대신 쓰는 듯)
     },
 };
 
+/* 팝업창 */
 const SignaturePopUp = ({ drawDataStore, setDrawDataStore, openPopUp, closePopUp }) => {
 
     const SignatureCanvasRef = useRef();
@@ -23,26 +25,19 @@ const SignaturePopUp = ({ drawDataStore, setDrawDataStore, openPopUp, closePopUp
     const onSubmit = (e) => {
         setDrawDataStore({
             ...drawDataStore,
-            base64Data: SignatureCanvasRef.current.getTrimmedCanvas().toDataURL('image/png')
+            base64Data: SignatureCanvasRef.current.getCanvas().toDataURL('image/png')
         });
         closePopUp();
         console.log(drawDataStore.base64Data);
-        e.preventDefault();
     };
 
+    // 취소 콜백 함수는 싸인 위치에 있는 싸인 이미지를 제거하는 게 아니라 유지를 해야함
     const onCancel = (e) => {
         closePopUp();
-        e.preventDefault();
-        // setDrawDataStore({
-        //     ...drawDataStore,
-        //     base64Data: undefined
-        // });
-        // 취소 버튼은 싸인 위치에 있는 싸인 이미지를 제거하는 게 아니라 유지를 해야함
     };
 
     return (
         <div>
-            {/* <NewWindow className="SignaturePopUp"> */}
             <Modal
                 isOpen={openPopUp}
                 // onAfterOpen={}
@@ -53,7 +48,7 @@ const SignaturePopUp = ({ drawDataStore, setDrawDataStore, openPopUp, closePopUp
                 <form>
                     <div className="SignatureCanvas">
                         <SignatureCanvas
-                            ref={SignatureCanvasRef}
+                            ref={SignatureCanvasRef} // 확인버튼을 누르면 해당 ref의 current에서 canvas를 가져옴
                             penColor='black'
                             canvasProps={{ className: 'SigCanvas' }}
                         />
@@ -61,7 +56,6 @@ const SignaturePopUp = ({ drawDataStore, setDrawDataStore, openPopUp, closePopUp
                     <SignatureButtons onSubmit={onSubmit} onCancel={onCancel} />
                 </form>
             </Modal>
-            {/* </NewWindow> */}
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../index.css';
 
+/* 제목 */
 const SignatureHeader = ({}) => {
     return(
         <div className='SignatureHeader'>
