@@ -28,7 +28,6 @@ const SignaturePopUp = ({ drawDataStore, setDrawDataStore, openPopUp, closePopUp
             base64Data: SignatureCanvasRef.current.getCanvas().toDataURL('image/png')
         });
         closePopUp();
-        console.log(drawDataStore.base64Data);
     };
 
     // 취소 콜백 함수는 싸인 위치에 있는 싸인 이미지를 제거하는 게 아니라 유지를 해야함
