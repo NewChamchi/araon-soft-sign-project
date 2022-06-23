@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import NewWindow from 'react-new-window';
 import '../index.css';
 import SignatureButtons from './SignatureButtons';
-import SignatureDraw from './SignatureDraw';
 import SignatureCanvas from 'react-signature-canvas';
 import Modal from 'react-modal'
 
@@ -56,7 +55,7 @@ const SignaturePopUp = ({ drawDataStore, setDrawDataStore, openPopUp, closePopUp
                         <SignatureCanvas
                             ref={SignatureCanvasRef}
                             penColor='black'
-                            canvasProps={{ className: 'sigCanvas' }}
+                            canvasProps={{ className: 'SigCanvas' }}
                         />
                     </div>
                     <SignatureButtons onSubmit={onSubmit} onCancel={onCancel} />

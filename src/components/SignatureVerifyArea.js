@@ -4,7 +4,7 @@ import '../index.css';
 const SignatureVerifyArea = ({ drawDataStore }) => {
 
     return (
-        <div className="SingnatureVerifyArea">
+        <div className="SignatureVerifyArea">
             <span className="SignatureLocation">싸인 위치</span>
             {(drawDataStore.base64Data) ?
                 <img

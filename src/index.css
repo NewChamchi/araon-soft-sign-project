@@ -1,4 +1,47 @@
-.sigCanvas {
+.SignatureTemplate {
+  width : 1025px;
+  margin : 100px auto;
+}
+
+.SignatureHeader {
+  width : 800px;
+  height : 100px;
+  margin : auto;
+}
+
+.SignatureContents {
+  margin : 100px auto;
+}
+
+.SignatureTextArea {
+  width : 800px;
+  height : 400px;
+  margin : 20px auto;
+  display: block;
+}
+
+.SignatureTextArea textarea{
+  width : 100%;
+  height : 70%;
+  margin: 50px auto;
+  resize : none;
+  overflow-y: scroll;
+}
+
+.SignaturePermission {
+  display: flex;
+  width : 800px;
+  height : 100px;
+  margin : 20px auto;
+  justify-content: space-between;
+  align-items: center;
+  border : 1px solid black;
+}
+
+.SignaturePermission span {
+  margin : auto 20px;
+}
+.SigCanvas {
   width : 500px;
   height : 200px;
   border : 1px solid black;
@@ -8,33 +51,37 @@
   display : flex;
   width : 500px;
   height : 50px;
-  justify-content: space-evenly;
+  justify-content:space-around;
 }
 
 .SignaturePopUp {
   width : 700px;
   height : 300px;
-  margin : 0 auto;
+  margin : 0px auto;
 }
 
 .SignatureVerifyArea {
+  display: flex; /* 정확하게 뭔지 알아볼 것 */
+  justify-content: center;
+  align-items: center;
   position : relative;
-  width : 300px;
-  height : 200px;
+  width : 200px;
+  height : 100px;
 }
 
 .SignatureLocation {
   display: flex; /* 정확하게 뭔지 알아볼 것 */
   position : absolute;
-  width : 60px;
-  height : 40px;
-  font-size : 0.6em;
-  align-items: center;
+  font-size : 1em;
+  width: 150px;
+  height: 75px;
   justify-content: center;
+  align-items: center;
+  border : 1px solid black;
 }
 
 .SignaturePaste {
   position : absolute;
-  width : 60px;
-  height : 40px;
+  width: 150px;
+  height: 75px;
 }
