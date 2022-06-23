@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import '../index.css';
 
-const SignatureVerifyArea = ({ drawDataStore, setDrawDataStore, isVisible }) => {
+const SignatureVerifyArea = ({ drawDataStore }) => {
 
     return (
         <div className="SingnatureVerifyArea">

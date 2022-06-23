@@ -4,31 +4,36 @@ import '../index.css';
 import SignatureButtons from './SignatureButtons';
 import SignatureDraw from './SignatureDraw';
 import SignatureCanvas from 'react-signature-canvas';
+import Modal from 'react-modal'
 
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
-const SignaturePopUp = ({ drawDataStore, setDrawDataStore, isVisible, setIsVisible }) => {
-    useEffect(() => {
-        console.log("팝업이 보임");
-        setIsVisible(true);
-        return() => {
-            console.log("팝업이 사라짐");
-            setIsVisible(false);
-        }
-    },[]);
+const SignaturePopUp = ({ drawDataStore, setDrawDataStore, openPopUp, closePopUp }) => {
 
     const SignatureCanvasRef = useRef();
 
     const onSubmit = (e) => {
-        setIsVisible(() => false);
         setDrawDataStore({
             ...drawDataStore,
             base64Data: SignatureCanvasRef.current.getTrimmedCanvas().toDataURL('image/png')
         });
+        closePopUp();
         console.log(drawDataStore.base64Data);
+        e.preventDefault();
     };
 
     const onCancel = (e) => {
-        setIsVisible(() => false);
+        closePopUp();
+        e.preventDefault();
         // setDrawDataStore({
         //     ...drawDataStore,
         //     base64Data: undefined
@@ -38,7 +43,14 @@ const SignaturePopUp = ({ drawDataStore, setDrawDataStore, isVisible, setIsVisib
 
     return (
         <div>
-            <NewWindow className="SignaturePopUp">
+            {/* <NewWindow className="SignaturePopUp"> */}
+            <Modal
+                isOpen={openPopUp}
+                // onAfterOpen={}
+                onRequestClose={closePopUp}
+                style={customStyles}
+                contentLabel={"Signature Input Window"}
+            >
                 <form>
                     <div className="SignatureCanvas">
                         <SignatureCanvas
@@ -47,9 +59,10 @@ const SignaturePopUp = ({ drawDataStore, setDrawDataStore, isVisible, setIsVisib
                             canvasProps={{ className: 'sigCanvas' }}
                         />
                     </div>
-                    <SignatureButtons onSubmit={onSubmit} onCancel={onCancel}/>
+                    <SignatureButtons onSubmit={onSubmit} onCancel={onCancel} />
                 </form>
-            </NewWindow>
+            </Modal>
+            {/* </NewWindow> */}
         </div>
     );
 };

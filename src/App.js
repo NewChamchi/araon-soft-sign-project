@@ -11,39 +11,52 @@ signature 등록 프로젝트 개발
 */
 function App() {
   const [drawDataStore, setDrawDataStore] = useState(testData);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isPopUp, setIsPopUp] = useState(false);
 
   /*
   화면에 팝업창을 띄우는 것을 감시하기 위한 콜백함수 
-  만약 
   */
-  const onToggleVisible = (e) => {
-    setIsVisible(!isVisible);
+  // const onTogglePopUp = (e) => {
+  //   setIsPopUp(!isPopUp);
+  //   e.preventDefault();
+  //   if (!isPopUp) {
+  //     setDrawDataStore(...drawDataStore, drawDataStore.base64Data = undefined);
+  //   };
+  // };
+
+  const openPopUp = (e) => {
+    setIsPopUp(true);
     e.preventDefault();
-    if (!isVisible) {
-      setDrawDataStore(...drawDataStore, drawDataStore.base64Data = undefined);
-    };
-  };
+  }
+
+  const closePopUp = (e) => {
+    setIsPopUp(false);
+    e.preventDefault();
+  }
 
   return (
     <div>
       <form>
         <button
           className="TestButton"
-          onClick={onToggleVisible}
-        >팝업 {(!isVisible) ? "띄우기" : "지우기"} 테스트 버튼
+          onClick={openPopUp}
+        >팝업 띄우기 테스트 버튼
         </button>
         <SignatureVerifyArea
           drawDataStore={drawDataStore}
-          setDrawDataStore={setDrawDataStore}
-          isVisible={isVisible}
         />
-        {isVisible && <SignaturePopUp
+        {isPopUp && <SignaturePopUp
           drawDataStore={drawDataStore}
           setDrawDataStore={setDrawDataStore}
-          isVisible={isVisible}
-          setIsVisible={setIsVisible}
-        />}
+          openPopUp={openPopUp}
+          closePopUp={closePopUp}
+          />}
+        {/* {isPopUp && <SignaturePopUp
+          drawDataStore={drawDataStore}
+          setDrawDataStore={setDrawDataStore}
+          isPopUp={isPopUp}
+          setIsPopUp={setIsPopUp}
+        />} */}
       </form>
     </div>
   );
